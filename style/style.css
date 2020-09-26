@@ -19,7 +19,7 @@ body {
 
 .main {
   /* width: 60%; */
-  background-color: coral;
+  /* background-color: coral; */
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -33,9 +33,33 @@ body {
 }
 
 .tweets-search-container {
-  height: 70px;
   margin: 20px;
-  background-color: red;
+  margin-top: 30px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #979797;
+}
+
+.tweets-search-container i {
+  color: white;
+  font-size: 30px;
+  padding-left: 10px;
+}
+
+
+.tweets-search-container input {
+  flex: 1;
+  background-color: transparent;
+  border: none;
+  font-size: 30px;
+  color: white;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+
+.tweets-search-container input:focus {
+  outline: none;
 }
 
 .tweets-list {

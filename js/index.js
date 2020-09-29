@@ -7,7 +7,10 @@ const URL = "http://localhost:3000/tweets";
  */
 const getTwitterData = () => {
 
+    const query = document.getElementById('user-search-input').value;
     const url = "http://localhost:3000/tweets?q=coding&count=10";
+    console.log(query);
+
     fetch(url).then((response) => {
         return response.json();
     }).then((data) => {

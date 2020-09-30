@@ -35,7 +35,10 @@ const saveNextPage = (metadata) => {};
 /**
  * Menghandle saat pengguna mengklik trend
  */
-const selectTrend = (e) => {};
+const selectTrend = (e) => {
+  const text = e.innerText;
+  console.log(text);
+};
 
 /**
  * Atur visibilitas halaman berikutnya berdasarkan jika ada data di halaman berikutnya
@@ -48,6 +51,7 @@ const nextPageButtonVisibility = (metadata) => {};
 const buildTweets = (tweets, nextPage) => {
   let twitterContent = "";
   tweets.map((tweet) => {
+    const createdDate = moment(tweet.created_at).fromNow();
     twitterContent += `
         <div class="tweets-container">
           <div class="tweets-user-info">
@@ -73,7 +77,7 @@ const buildTweets = (tweets, nextPage) => {
             ${tweet.full_text}
           </div>
           <div class="tweets-date-container">
-              20 hours ago
+              ${createdDate}
           </div>
       </div>
     `;

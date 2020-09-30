@@ -9,6 +9,7 @@
         <link rel="stylesheet" href="style/style.css">
         <link rel="stylesheet" href="style/tweet.css">
         <script src="https://kit.fontawesome.com/c939d0e917.js" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.0/moment.min.js"></script>
     </head>
     <body>
         <div class="container home-page">
@@ -42,9 +43,9 @@
                     <div class="tweets-trending">
                         <h5>Trends for you</h5>
                         <ul>
-                            <li>#Coding</li>
-                            <li>#JavaScript</li>
-                            <li>#Pyhton</li>
+                            <li onclick="selectTrend(this)">#Coding</li>
+                            <li onclick="selectTrend(this)">#JavaScript</li>
+                            <li onclick="selectTrend(this)">#Pyhton</li>
                         </ul>
                     </div>
                 </div>

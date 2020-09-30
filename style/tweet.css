@@ -21,6 +21,16 @@
   height: 200px;
   border: 1px solid #1c1c1c;
   border-radius: 20px;
+  display: flex;
+  overflow: hidden;
+  flex-wrap: wrap;
+}
+
+.tweet-image {
+  flex-basis: 50%;
+  background-size: cover;
+  flex-grow: 1;
+  background-position: center;
 }
 
 .tweets-text-container {

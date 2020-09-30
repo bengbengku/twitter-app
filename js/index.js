@@ -63,27 +63,41 @@ const buildTweets = (tweets, nextPage) => {
                   </div>
               </div>
           </div>
-          <div class="tweets-images-container">
-              <div class="tweet-image"></div>
-          </div>
+    `;
+    if (tweet.extended_entities && tweet.extended_entities.media.length > 0) {
+      twitterContent += buildImages(tweet.extended_entities.media);
+    }
+
+    twitterContent += `
           <div class="tweets-text-container">
             ${tweet.full_text}
           </div>
           <div class="tweets-date-container">
               20 hours ago
           </div>
-        </div>
-        `;
+      </div>
+    `;
   });
 
-  document.querySelector('.tweets-list').innerHTML = twitterContent;
-
+  document.querySelector(".tweets-list").innerHTML = twitterContent;
 };
 
 /**
  * Bangun HTML untuk Gambar Tweet
  */
-const buildImages = (mediaList) => {};
+const buildImages = (mediaList) => {
+  let imagesContent = `<div class="tweets-images-container">`;
+  let imageExists = false;
+  mediaList.map((media) => {
+      if(media.type == "photo") {
+        imageExists = true;
+          imagesContent += `<div class="tweet-image" style="background-image: url(${media.media_url_https})"></div>`;
+      }
+  });
+
+  imagesContent += `</div>`
+  return imageExists ? imagesContent : '';
+};
 
 /**
  * Bangun HTML untuk video Tweet

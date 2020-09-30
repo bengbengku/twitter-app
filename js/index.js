@@ -16,7 +16,7 @@ const onEnter = (e) => {
 const onNextPage = () => {
     if(nextPageUrl) {
   
-      getTwitterData();
+      getTwitterData(true);
 
     }
 }
@@ -25,14 +25,14 @@ const onNextPage = () => {
 /**
  * Mengambil Data Twitter dari API
  */
-const getTwitterData = () => {
+const getTwitterData = (nextPage=false) => {
   const query = document.getElementById("user-search-input").value;
 
   if (!query) return;
   const encodedQuery = encodeURIComponent(query);
   let fullUrl = `${URL}?q=${encodedQuery}&count=10`; //pencarian | const diganti let untuk beri akses nextPageUrl
 
-  if(nextPageUrl) {
+  if(nextPage && nextPageUrl) {
       fullUrl = nextPageUrl;
   }
 
@@ -41,8 +41,9 @@ const getTwitterData = () => {
       return response.json();
     })
     .then((data) => {
-      buildTweets(data.statuses);
+      buildTweets(data.statuses, nextPage);
       saveNextPage(data.search_metadata);
+      nextPageButtonVisibility(data.search_metadata);
     });
 };
 getTwitterData();
@@ -70,7 +71,13 @@ const selectTrend = (e) => {
 /**
  * Atur visibilitas halaman berikutnya berdasarkan jika ada data di halaman berikutnya
  */
-const nextPageButtonVisibility = (metadata) => {};
+const nextPageButtonVisibility = (metadata) => {
+  if(metadata.next_results) {
+    document.getElementById('next-page').style.visibility = "visible";
+  } else {
+    document.getElementById('next-page').style.visibility = "hidden";
+  }
+};
 
 /**
  * Buat HTML Tweet berdasarkan Data dari API
@@ -110,7 +117,12 @@ const buildTweets = (tweets, nextPage) => {
     `;
   });
 
-  document.querySelector(".tweets-list").innerHTML = twitterContent;
+  if(nextPage) {
+    document.querySelector('.tweets-list').insertAdjacentHTML('beforeend', twitterContent);
+  } else {
+    document.querySelector(".tweets-list").innerHTML = twitterContent;
+  }
+
 };
 
 /**

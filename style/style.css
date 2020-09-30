@@ -183,3 +183,16 @@ body {
 .next-page-container i:hover {
   color: white;
 }
+
+.tweets-welcome-message {
+  color: white;
+  text-align: center;
+}
+
+.tweets-welcome-message h5{
+  margin-bottom: 0;
+}
+
+.tweets-welcome-message p{
+  font-size: 10px;
+}

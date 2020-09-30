@@ -37,7 +37,8 @@ const saveNextPage = (metadata) => {};
  */
 const selectTrend = (e) => {
   const text = e.innerText;
-  console.log(text);
+  document.getElementById('user-search-input').value = text;
+  getTwitterData();
 };
 
 /**

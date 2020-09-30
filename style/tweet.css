@@ -5,6 +5,11 @@
   border-radius: 20px;
   overflow: hidden;
   margin-top: 20px;
+  transition: all 0.2s ease;
+}
+
+.tweets-container:hover {
+  background-color:  #263846a8;
 }
 
 .tweets-user-info {
@@ -65,6 +70,7 @@
   color: #47525d;
   font-size: 10px;
 }
+
 
 .tweets-user-info {
   margin-left: 20px;

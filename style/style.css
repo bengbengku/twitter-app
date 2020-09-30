@@ -128,6 +128,9 @@ body {
   background-color: white;
   border-radius: 50%;
   border: 1px solid #979797;
+  background-image: url(./../images/benget2.jpg);
+  background-position: center;
+  background-size: contain;
 }
 
 .tweets-trending {

@@ -1,12 +1,11 @@
 const URL = "http://localhost:3000/tweets";
 
-
 //Trik membuat tombol enter dalam pencarian melaui code key = "Enter"
 const onEnter = (e) => {
-    if(e.key == "Enter"){
-        getTwitterData();
-    }
-}
+  if (e.key == "Enter") {
+    getTwitterData();
+  }
+};
 
 /**
  * Mengambil Data Twitter dari API
@@ -23,7 +22,7 @@ const getTwitterData = () => {
       return response.json();
     })
     .then((data) => {
-      console.log(data);
+      buildTweets(data.statuses);
     });
 };
 getTwitterData();
@@ -46,7 +45,40 @@ const nextPageButtonVisibility = (metadata) => {};
 /**
  * Buat HTML Tweet berdasarkan Data dari API
  */
-const buildTweets = (tweets, nextPage) => {};
+const buildTweets = (tweets, nextPage) => {
+  let twitterContent = "";
+  tweets.map((tweet) => {
+    twitterContent += `
+        <div class="tweets-container">
+          <div class="tweets-user-info">
+              <div class="tweets-user-profile">
+
+              </div>
+              <div class="tweets-user-name-container">
+                  <div class="tweets-user-fullname">
+                      Anggiat Benget
+                  </div>
+                  <div class="tweets-user-username">
+                      @bengbengku
+                  </div>
+              </div>
+          </div>
+          <div class="tweets-images-container">
+              <div class="tweet-image"></div>
+          </div>
+          <div class="tweets-text-container">
+            ${tweet.full_text}
+          </div>
+          <div class="tweets-date-container">
+              20 hours ago
+          </div>
+        </div>
+        `;
+  });
+
+  document.querySelector('.tweets-list').innerHTML = twitterContent;
+
+};
 
 /**
  * Bangun HTML untuk Gambar Tweet

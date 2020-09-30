@@ -154,3 +154,24 @@ body {
   padding-left: 20px;
   cursor: pointer;
 }
+
+.next-page-container {
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  color:  #324150;
+  border: 1px solid #38444D;
+  border-radius: 20px;
+  padding: 6px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.17s ease-in-out;
+}
+
+.next-page-container:hover {
+  background-color: #263949b6;
+}
+
+.next-page-container i:hover {
+  color: white;
+}

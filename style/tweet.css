@@ -4,6 +4,7 @@
   border: 1px solid #1c1c1c;
   border-radius: 20px;
   overflow: hidden;
+  margin-top: 20px;
 }
 
 .tweets-user-info {

@@ -51,21 +51,21 @@ const buildTweets = (tweets, nextPage) => {
     twitterContent += `
         <div class="tweets-container">
           <div class="tweets-user-info">
-              <div class="tweets-user-profile">
-
+              <div class="tweets-user-profile" style="background-image: url(${tweet.user.profile_image_url_https})">
               </div>
               <div class="tweets-user-name-container">
                   <div class="tweets-user-fullname">
-                      Anggiat Benget
+                      ${tweet.user.name}
                   </div>
                   <div class="tweets-user-username">
-                      @bengbengku
+                      @${tweet.user.screen_name}
                   </div>
               </div>
           </div>
     `;
     if (tweet.extended_entities && tweet.extended_entities.media.length > 0) {
       twitterContent += buildImages(tweet.extended_entities.media);
+      twitterContent += buildVideo(tweet.extended_entities.media);
     }
 
     twitterContent += `
@@ -102,4 +102,27 @@ const buildImages = (mediaList) => {
 /**
  * Bangun HTML untuk video Tweet
  */
-const buildVideo = (mediaList) => {};
+const buildVideo = (mediaList) => {
+  let videoContent = `<div class="tweet-video-container">`;
+  let videoExists = false;
+  mediaList.map((media) => {
+      if(media.type == "video") {
+        videoExists = true;
+          videoContent += `
+              <video controls>
+                <source src="${media.video_info.variants[0].url}" type="video/mp4">
+              </video>
+          `;
+      } else if (media.type == "animated_gif") {
+          videoExists = true;
+          videoContent += `
+            <video loop autoplay>
+              <source src="${media.video_info.variants[0].url}" type="video/mp4">
+            </video>
+          `;
+      }
+  });
+
+  videoContent += `</div>`
+  return videoExists ? videoContent : '';
+};

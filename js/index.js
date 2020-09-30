@@ -1,4 +1,6 @@
 const URL = "http://localhost:3000/tweets";
+let nextPageUrl = null;
+
 
 //Trik membuat tombol enter dalam pencarian melaui code key = "Enter"
 const onEnter = (e) => {
@@ -8,6 +10,19 @@ const onEnter = (e) => {
 };
 
 /**
+ * Meload data selanjutnya untuk nextPage
+ */
+
+const onNextPage = () => {
+    if(nextPageUrl) {
+  
+      getTwitterData();
+
+    }
+}
+
+
+/**
  * Mengambil Data Twitter dari API
  */
 const getTwitterData = () => {
@@ -15,7 +30,11 @@ const getTwitterData = () => {
 
   if (!query) return;
   const encodedQuery = encodeURIComponent(query);
-  const fullUrl = `${URL}?q=${encodedQuery}&count=10`; //pencarian
+  let fullUrl = `${URL}?q=${encodedQuery}&count=10`; //pencarian | const diganti let untuk beri akses nextPageUrl
+
+  if(nextPageUrl) {
+      fullUrl = nextPageUrl;
+  }
 
   fetch(fullUrl)
     .then((response) => {
@@ -23,6 +42,7 @@ const getTwitterData = () => {
     })
     .then((data) => {
       buildTweets(data.statuses);
+      saveNextPage(data.search_metadata);
     });
 };
 getTwitterData();
@@ -30,7 +50,13 @@ getTwitterData();
 /**
  * Menyimpan data page selanjutnya
  */
-const saveNextPage = (metadata) => {};
+const saveNextPage = (metadata) => {
+    if(metadata.next_results) {
+        nextPageUrl = `${URL}${metadata.next_results}`;
+    } else {
+        nextPageUrl = null;
+    }
+};
 
 /**
  * Menghandle saat pengguna mengklik trend
